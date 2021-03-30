@@ -1,34 +1,36 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 class Signin extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      signInEmail: "",
-      signInPassword: "",
+      signInEmail: '',
+      signInPassword: '',
     };
   }
 
-  onEmailChange = (event) => {
+  onEmailChange = event => {
     this.setState({
       signInEmail: event.target.value,
     });
   };
 
-  onPasswordChange = (event) => {
+  onPasswordChange = event => {
     this.setState({
       signInPassword: event.target.value,
     });
   };
 
+  // https://polar-river-98454.herokuapp.com
+
   onSubmitSignIn = () => {
-    fetch('https://polar-river-98454.herokuapp.com/signin', {
+    fetch('https://facedetectme.herokuapp.com/signin', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         email: this.state.signInEmail,
-        password: this.state.signInPassword
-      })
+        password: this.state.signInPassword,
+      }),
     })
       .then(response => response.json())
       .then(user => {
@@ -36,9 +38,8 @@ class Signin extends Component {
           this.props.loadUser(user);
           this.props.onRouteChange('home');
         }
-      })
+      });
   };
-
 
   render() {
     const { onRouteChange } = this.props;
@@ -83,7 +84,7 @@ class Signin extends Component {
             </div>
             <div className="lh-copy mt3">
               <p
-                onClick={() => onRouteChange("register")}
+                onClick={() => onRouteChange('register')}
                 className="f6 link dim black db pointer"
               >
                 Register
